@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  dev:
+    image: ruby:2.4
+    command: ruby report.rb
+    volumes:
+      - .:/work
+      - ruby2.4-bundle-cache:/usr/local/bundle
+    working_dir: /work
+    environment:
+      GIT_ACCESS_TOKEN:
+      PROJECT_NAME: "Core" # must be within the 'greensync' org
+      DOING_COLUMN_NAME: "Developing"
+      DONE_COLUMN_NAME: "Done"
+      DEBUG:
+      IGNORED_COLUMNS: "Backlog, Something"
+
+volumes:
+  ruby2.4-bundle-cache:
+    external: true
