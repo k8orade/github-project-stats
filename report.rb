@@ -46,7 +46,7 @@ class ProjectStats
     @card_headings << column
 
     if @card_data[card_id].key?(column)
-      @card_data[card_id][column] += 1
+      @card_data[card_id][column] = @card_data[card_id][column].to_i + 1
     else
       @card_data[card_id][column] = 1
     end
@@ -95,7 +95,7 @@ class ProjectStats
     card_data = {}
 
     CSV.foreach("card-stats.csv", :headers => true, encoding: "UTF-8") do |row|
-      card_data[row.fields[0]] = Hash[row.headers[1..-1].zip(row.fields[1..-1])]
+      card_data[row.fields[0].to_i] = Hash[row.headers[1..-1].zip(row.fields[1..-1])]
     end
 
     card_data
