@@ -51,13 +51,13 @@ class ProjectStats
   end
 
   def set_start_date(card_id)
-    return if @card_data[card_id].key?("Start Date")
+    return if @card_data[card_id].key?("Start Date") && @card_data[card_id]["Start Date"]
 
     @card_data[card_id]["Start Date"] = Date.today.strftime("%d/%m/%Y")
   end
 
   def finalise_card(card)
-    return if @card_data[card[:id]].key?("Completed Date")
+    return if @card_data[card[:id]].key?("Completed Date") && @card_data[card[:id]]["Completed Date"]
 
     set_start_date(card[:id])
 
