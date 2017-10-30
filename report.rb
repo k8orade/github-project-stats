@@ -21,7 +21,7 @@ class ProjectStats
 
         set_start_date(card[:id]) if column[:name] == ENV["DOING_COLUMN_NAME"]
         finalise_card(card) if column[:name] == ENV["DONE_COLUMN_NAME"]
-        add_column_count(card[:id], column[:name])
+        add_column_date(card[:id], column[:name])
       end
     end
 
@@ -42,13 +42,11 @@ class ProjectStats
     end
   end
 
-  def add_column_count(card_id, column)
+  def add_column_date(card_id, column)
     @card_headings << column
 
-    if @card_data[card_id].key?(column)
-      @card_data[card_id][column] = @card_data[card_id][column].to_i + 1
-    else
-      @card_data[card_id][column] = 1
+    unless @card_data[card_id].key?(column)
+      @card_data[card_id][column] = Date.today.strftime("%d/%m/%Y")
     end
   end
 
