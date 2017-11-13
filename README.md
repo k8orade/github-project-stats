@@ -14,9 +14,8 @@ Issue |	Link to the Issue/Pull Request (if applicable)
 Sum Value	| Always 1. Used for reporting graps 
 Start Date | Date the card was moved to `DOING_COLUMN_NAME`
 Completed Date	| Date the card was moved to `DONE_COLUMN_NAME`
-Cycle Time	| Time (in days) between Start Date and Completed Date
 Labels	| A string of space-seperated labels attached to the Issue
-{COLUMN_NAME}	| A count of days that the card spent in this column
+{COLUMN_NAME}	| The recorded date that a cord moved in to this column
 
 Most of this information will be collected when the card is moved into the `DONE_COLUMN_NAME` column, to avoid
 re-computation every day.
@@ -35,3 +34,12 @@ the following environment variables in the `docker-compose.yml` file:
 ```
 
 Then you can run `script/report` to run the report
+
+### Run daily on Mac
+The example `com.core.githubreport.plist` file can be used to run the script every day at 4pm using launchd on Mac. Because you're using launchd, if your computer happens to be sleeping at the time the job is scheduled, it will run the job when it wakes up. To configure launchd:
+
+```
+cp com.core.githubreport.plist ~/Library/LaunchAgents/
+launchctl load ~/Library/LaunchAgents/com.core.githubreport.plist
+launchctl start com.core.githubreport
+```
