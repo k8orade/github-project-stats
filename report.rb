@@ -45,9 +45,8 @@ class ProjectStats
   def add_column_date(card_id, column)
     @card_headings << column
 
-    unless @card_data[card_id].key?(column)
-      @card_data[card_id][column] = Date.today.strftime("%d/%m/%Y")
-    end
+    @card_data[card_id][column] = nil unless @card_data[card_id].key?(column) 
+    @card_data[card_id][column] = Date.today.strftime("%d/%m/%Y") unless @card_data[card_id][column] 
   end
 
   def set_start_date(card_id)
