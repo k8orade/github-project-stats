@@ -14,7 +14,7 @@ services:
       DOING_COLUMN_NAME: "Developing"
       DONE_COLUMN_NAME: "Done"
       DEBUG:
-      IGNORED_COLUMNS: "Backlog, Something"
+      IGNORED_COLUMNS: "Backlog, Triage"
 
 volumes:
   ruby2.4-bundle-cache:
