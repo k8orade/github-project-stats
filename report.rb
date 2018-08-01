@@ -45,18 +45,19 @@ class ProjectStats
   def add_column_date(card_id, column)
     @card_headings << column
 
-    @card_data[card_id][column] = nil unless @card_data[card_id].key?(column) 
-    @card_data[card_id][column] = Date.today.strftime("%d/%m/%Y") unless @card_data[card_id][column] 
+    return if @card_data[card_id].key?(column) && !@card_data[card_id][column].to_s.empty?
+
+    @card_data[card_id][column] = Date.today.strftime("%d/%m/%Y")
   end
 
   def set_start_date(card_id)
-    return if @card_data[card_id].key?("Start Date") && @card_data[card_id]["Start Date"]
+    return if @card_data[card_id].key?("Start Date") && !@card_data[card_id]["Start Date"].to_s.empty?
 
     @card_data[card_id]["Start Date"] = Date.today.strftime("%d/%m/%Y")
   end
 
   def finalise_card(card)
-    return if @card_data[card[:id]].key?("Completed Date") && @card_data[card[:id]]["Completed Date"]
+    return if @card_data[card[:id]].key?("Completed Date") && !@card_data[card[:id]]["Completed Date"].to_s.empty?
 
     set_start_date(card[:id])
 
