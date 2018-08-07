@@ -73,7 +73,7 @@ class ProjectStats
         repo, issue_id = card[:content_url].match(/.*\/repos\/(.*)\/issues\/(\d*)/).captures
         issue = client.issue(repo, issue_id)
 
-        card_row["Issue"]  = "http://github.com/greensync/#{repo}/issues/#{issue_id}"
+        card_row["Issue"]  = "http://github.com/#{repo}/issues/#{issue_id}"
         card_row["Card"] = issue[:title]
         card_row["Labels"] = repo.split("/").last.gsub("_", "-") + " "
         card_row["Labels"] += issue[:labels].map{ |label| label[:name].gsub(" ", "-") }.join(" ")
