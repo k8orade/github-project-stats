@@ -15,6 +15,7 @@ class ProjectStats
   def report
     client.project_columns(project_id).each do |column|
       next if ignored_columns.include?(column[:name])
+      @card_headings << column[:name]
 
       client.column_cards(column[:id]).each do |card|
         @card_data[card[:id]] = {} unless @card_data.key?(card[:id])
@@ -43,8 +44,6 @@ class ProjectStats
   end
 
   def add_column_date(card_id, column)
-    @card_headings << column
-
     return if @card_data[card_id].key?(column) && !@card_data[card_id][column].to_s.empty?
 
     @card_data[card_id][column] = Date.today.strftime("%d/%m/%Y")
